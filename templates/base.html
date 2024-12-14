@@ -15,7 +15,7 @@
                 <nav class="navbar navbar-expand-md navbar fixed-top bg-primary">
                     <div class="container-fluid mx-4">
                         <a class="navbar-brand text-white pb-0" href="{% url 'index' %}">
-                            <h3 class="pb-2">My Media</h3>
+                            <h3 class="">My Media</h3>
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -27,17 +27,17 @@
                                 </li>
                                 {% if user.is_authenticated %}
                                     <li class="nav-item">
-                                        <p class="nav-link text-white pb-0">Welcome {{ user.username }}</p>
+                                        <a class="nav-link text-white ">Welcome {{ user.username }}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white pb-0" href="{% url 'logout' %}">Logout</a>
+                                        <a class="nav-link text-white " href="{% url 'logout' %}">Logout</a>
                                     </li>
                                     {% else %}
                                     <li class="nav-item">
-                                        <a class="nav-link text-white pb-3" href="#">Register</a>
+                                        <a class="nav-link text-white " href="#">Register</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white pb-3" href="{% url 'login' %}">Login</a>
+                                        <a class="nav-link text-white " href="{% url 'login' %}">Login</a>
                                     </li>
                                 {% endif %}
                             </ul>
