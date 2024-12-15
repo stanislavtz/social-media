@@ -10,6 +10,7 @@ def index(request):
 
 def login_user(request):
     form = LoginForm()
+    message = ""
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -21,8 +22,15 @@ def login_user(request):
                 print(request.user.is_authenticated)
                 return redirect("index")
             else:
-                print("invalid username or password!")
-    return render(request, "users/login.html", { "form": form })
+                message = "** Invalid username or password!"
+        else:
+            message = "** Invalid form. Please populate all input fields!"
+    context = { 
+        "form": form,
+        "message": message
+    }
+
+    return render(request, "users/login.html", context)
 
 
 @login_required
