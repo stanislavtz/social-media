@@ -11,6 +11,10 @@ def index(request):
 def login_user(request):
     form = LoginForm()
     message = ""
+
+    if request.user.is_authenticated:
+        return redirect("index")
+    
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -36,4 +40,4 @@ def login_user(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return redirect("index")
+    return render(request, "users/logout.html")
