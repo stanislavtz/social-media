@@ -3,12 +3,16 @@
 {% block title %}Login Page{% endblock title %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if message %}
-            <p class="text-danger">{{ message }}</p>
-        {% endif %}
-        <input type="submit" class="btn btn-primary" value="Login">
-    </form>
+    {% if not user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if message %}
+                <p class="text-danger">{{ message }}</p>
+            {% endif %}
+            <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+    {% else %}
+        <h1>You are logged in</h1>
+    {% endif %}
 {% endblock content %}

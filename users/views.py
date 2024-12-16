@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
@@ -13,7 +13,7 @@ def login_user(request):
     message = ""
 
     if request.user.is_authenticated:
-        return redirect("index")
+        return render(request, "users/login.html")
     
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -24,7 +24,7 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 print(request.user.is_authenticated)
-                return redirect("index")
+                return render(request, "users/login.html")
             else:
                 message = "** Invalid username or password!"
         else:
