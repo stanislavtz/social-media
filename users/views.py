@@ -43,7 +43,6 @@ def logout_user(request):
     return render(request, "users/logout.html")
 
 
-def user_profile(request, user_id):
-    if request.user.id == user_id:
-        user = request.user
-    return render(request, "users/profile.html", {"user": user})
+@login_required
+def user_profile(request):
+    return render(request, "users/profile.html")
