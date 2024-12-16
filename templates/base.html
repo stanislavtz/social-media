@@ -27,17 +27,17 @@
                                 </li>
                                 {% if user.is_authenticated %}
                                     <li class="nav-item">
-                                        <a class="nav-link text-white ">Welcome {{ user.username }}</a>
+                                        <a class="nav-link text-white" href="{% url 'profile' user.id %}">Welcome {{ user.username }}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white " href="{% url 'logout' %}">Logout</a>
+                                        <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
                                     </li>
                                     {% else %}
                                     <li class="nav-item">
-                                        <a class="nav-link text-white " href="#">Register</a>
+                                        <a class="nav-link text-white" href="#">Register</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white " href="{% url 'login' %}">Login</a>
+                                        <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
                                     </li>
                                 {% endif %}
                             </ul>

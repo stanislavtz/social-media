@@ -41,3 +41,9 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return render(request, "users/logout.html")
+
+
+def user_profile(request, user_id):
+    if request.user.id == user_id:
+        user = request.user
+    return render(request, "users/profile.html", {"user": user})

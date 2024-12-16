@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock title %}
+
+{% block content %}
+    <h1>{{ user.username|title }} profile page</h1>
+    <p>If you want to change your password? <a href="#">Click here</a></p>
+{% endblock content %}
