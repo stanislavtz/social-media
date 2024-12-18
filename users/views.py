@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ProfileForm
+from .models import Profile
 
 # Create your views here.
 def index(request):
@@ -10,29 +11,32 @@ def index(request):
 
 
 def register_user(request):
-    form = RegisterForm()
+    user_form = RegisterForm()
+    profile_form = ProfileForm()
     message = ""
 
     if request.method == "POST":
-        form = RegisterForm(request.POST)
+        user_form = RegisterForm(request.POST)
+        profile_form = ProfileForm(request.POST)
 
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            first_name = form.cleaned_data.get("first_name")
-            last_name = form.cleaned_data.get("last_name")
-            email = form.cleaned_data.get("email")
-            password = form.cleaned_data.get("password")
-            repeat_password = form.cleaned_data.get("repeat_password")
+        if user_form.is_valid():
+            username = user_form.cleaned_data.get("username")
+            first_name = user_form.cleaned_data.get("first_name")
+            last_name = user_form.cleaned_data.get("last_name")
+            email = user_form.cleaned_data.get("email")
+            password = user_form.cleaned_data.get("password")
+            repeat_password = user_form.cleaned_data.get("repeat_password")
 
             if password != repeat_password:
                 message = "Password don't match"
             else:  
-                print(username, first_name, last_name)
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
+                Profile.objects.create(user=user)
                 return redirect("login")
     
     context = {
-        "form": form,
+        "user_form": user_form,
+        "profile_form": profile_form,
         "message": message
     }
 
