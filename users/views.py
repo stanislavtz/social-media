@@ -9,7 +9,7 @@ def index(request):
     return render(request, "users/index.html")
 
 
-def register(request):
+def register_user(request):
     form = RegisterForm()
     message = ""
 
@@ -28,7 +28,7 @@ def register(request):
                 message = "Password don't match"
             else:  
                 print(username, first_name, last_name)
-                User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
+                user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
                 return redirect("login")
     
     context = {
