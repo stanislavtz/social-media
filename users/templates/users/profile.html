@@ -3,6 +3,14 @@
 {% block title %}User Profile{% endblock title %}
 
 {% block content %}
-    <h1>{{ user.username|title }} profile page</h1>
+    <h1>{{ user.username|title }}'s profile page</h1>
+    <hr>
+    <h4>Username: {{ user.username }}</h4>
+    <h4>First name: {{ user.first_name|title }}</h4>
+    <h4>Last name: {{ user.last_name|title }}</h4>
+    <h4>Email-address: {{ user.email }}</h4>
+    <img class="rounded" width="250px" heigh="auto" src="{{ user.profile.img.url }}">
     <p>If you want to change your password? <a href="{% url 'password_change' %}">Click here</a></p>
+    <a class="btn btn-success rounded" href="#">Edit profile</a>
+    <a class="btn btn-danger rounded" href="#">Delete profile</a>
 {% endblock content %}
