@@ -17,9 +17,9 @@ def register_user(request):
 
     if request.method == "POST":
         user_form = RegisterForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, files=request.FILES)
 
-        if user_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             username = user_form.cleaned_data.get("username")
             first_name = user_form.cleaned_data.get("first_name")
             last_name = user_form.cleaned_data.get("last_name")
@@ -31,7 +31,7 @@ def register_user(request):
                 message = "Password don't match"
             else:  
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
-                Profile.objects.create(user=user)
+                Profile.objects.create(user=user, img=request.FILES.get("img"))
                 return redirect("login")
     
     context = {
