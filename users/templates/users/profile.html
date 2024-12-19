@@ -10,7 +10,8 @@
     <h4>Last name: {{ user.last_name|title }}</h4>
     <h4>Email-address: {{ user.email }}</h4>
     <img class="rounded" width="250px" heigh="auto" src="{{ user.profile.img.url }}">
-    <p>If you want to change your password? <a href="{% url 'password_change' %}">Click here</a></p>
-    <a class="btn btn-success rounded" href="#">Edit profile</a>
-    <a class="btn btn-danger rounded" href="#">Delete profile</a>
+    <div class="mt-2">
+        <a class="btn btn-success rounded" href="{% url 'edit_user' user.id %}">Edit profile</a>
+        <a class="btn btn-danger rounded" href="#">Delete profile</a>
+    </div>
 {% endblock content %}

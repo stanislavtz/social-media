@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import RegisterForm, LoginForm, ProfileForm
+from .forms import RegisterForm, LoginForm, ProfileForm, EditUserForm
 from .models import Profile
 
 # Create your views here.
@@ -31,7 +31,12 @@ def register_user(request):
                 message = "Password don't match"
             else:  
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
+                
+                if not request.FILES.get("img"):
+                    request.FILES["img"] = "users/NoImage.png"
+                
                 Profile.objects.create(user=user, img=request.FILES.get("img"))
+
                 return redirect("login")
     
     context = {
@@ -82,3 +87,26 @@ def logout_user(request):
 @login_required
 def user_profile(request):
     return render(request, "users/profile.html")
+
+
+@login_required
+def edit_user(request, user_id):
+    user_form = EditUserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+
+    if request.method == "POST":
+        user_form = EditUserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile, files=request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            return redirect("profile")
+    
+    context = {
+        "user_form": user_form,
+        "profile_form": profile_form,
+    }
+
+    return render(request, "users/edit_user.html", context)
