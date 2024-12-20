@@ -4,4 +4,12 @@
 
 {% block content %}
     <h1>Home Page</h1>
+    <a href="{% url 'create_post' %}">Create post</a>
+    <br><hr>
+    {% for post in posts %}
+        <h4>{{ post.title }}</h4>
+        <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
+        <p>{{ post.caption }}<p>
+        <hr>
+    {% endfor %}
 {% endblock content %}

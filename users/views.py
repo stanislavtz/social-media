@@ -4,10 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import RegisterForm, LoginForm, ProfileForm, EditUserForm
 from .models import Profile
+from posts.models import Post
 
 # Create your views here.
 def index(request):
-    return render(request, "users/index.html")
+    posts = Post.objects.all()
+    return render(request, "users/index.html", {"posts": posts})
 
 
 def register_user(request):
