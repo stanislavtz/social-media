@@ -11,7 +11,7 @@
     <h4>Email-address: {{ user.email }}</h4>
     <img class="rounded" width="250px" heigh="auto" src="{{ user.profile.img.url }}">
     <div class="mt-2">
-        <a class="btn btn-success rounded" href="{% url 'edit_user' user.id %}">Edit profile</a>
+        <a class="btn btn-success rounded" href="{% url 'edit_user' %}">Edit profile</a>
         <a class="btn btn-danger rounded" href="#">Delete profile</a>
     </div>
 {% endblock content %}
