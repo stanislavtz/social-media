@@ -3,10 +3,9 @@ from .models import Post
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
-    class Meta:
-        model = Post
-        list_display_links = ("id", "title", "slug", "created")
-        list_filter = ("created",)
+    list_display = ("id", "title", "slug", "created")
+    list_filter = ("created",)
+    prepopulated_fields = {"slug": ["title"]}
 
 
 admin.site.register(Post, PostAdmin)
