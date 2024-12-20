@@ -90,7 +90,7 @@ def user_profile(request):
 
 
 @login_required
-def edit_user(request, user_id):
+def edit_user(request):
     user_form = EditUserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
 
