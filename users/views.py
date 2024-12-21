@@ -8,7 +8,7 @@ from posts.models import Post
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.all().filter(user=request.user)
+    posts = Post.objects.all()
     return render(request, "users/index.html", {"posts": posts})
 
 

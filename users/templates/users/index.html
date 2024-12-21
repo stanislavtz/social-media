@@ -8,6 +8,7 @@
     <br><hr>
     {% for post in posts %}
         <h4>{{ post.title }}</h4>
+        <h6>Author: <a href="{% url 'user_posts' %}">{{ post.user.username }}</a></h6>
         <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
         <p>{{ post.caption }}<p>
         <hr>
