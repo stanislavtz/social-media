@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Home Page{% endblock title %}
+{% block title %}{{ user.username|capfirst }} Page{% endblock title %}
 
 {% block content %}
-    <h1>Home Page</h1>
-    <a href="{% url 'create_post' %}">Create post</a>
+    <h1>{{ user.username|capfirst }} Page</h1>
+    <a href="{% url 'create_post' %}">Create new post</a>
     <br><hr>
+    <h2><em>{{ owner|capfirst }} posts:</em></h2>
+    <hr>
     {% for post in posts %}
         <h4>{{ post.title }}</h4>
         <h6>Author: <a href="{% url 'user_posts' post.user.id %}">{{ post.user.username }}</a></h6>
