@@ -10,6 +10,7 @@
     <h4>Last name: {{ user.last_name|title }}</h4>
     <h4>Email-address: {{ user.email }}</h4>
     <img class="rounded" width="250px" heigh="auto" src="{{ user.profile.img.url }}">
+    <p class="mt-2"><a class="link-item" href="{% url 'user_posts' user.id %}">Go to your posts list</a></p>
     <div class="mt-2">
         <a class="btn btn-success rounded" href="{% url 'edit_user' %}">Edit profile</a>
         <a class="btn btn-danger rounded" href="#">Delete profile</a>
