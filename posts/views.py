@@ -22,12 +22,11 @@ def create_post(request):
 
 
 @login_required
-def users_post(request, user_id):
-    user = User.objects.get(id=user_id)
-    posts = user.posts.all()
+def users_post(request):
+    posts = request.user.posts.all()
 
     context = {
-        "owner": user.username,
+        "owner": request.user.username,
         "posts": posts
     }
     

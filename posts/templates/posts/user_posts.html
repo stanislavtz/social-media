@@ -4,15 +4,23 @@
 
 {% block content %}
     <h1>{{ user.username|capfirst }} Page</h1>
-    <a href="{% url 'create_post' %}">Create new post</a>
+    <a class="btn btn-success my-3" href="{% url 'create_post' %}">Create post</a>
     <br><hr>
-    <h2><em>{{ owner|capfirst }} posts:</em></h2>
+    <h2><em>Manage your posts:</em></h2>
     <hr>
     {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        <h6>Author: <a href="{% url 'user_posts' post.user.id %}">{{ post.user.username }}</a></h6>
-        <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
-        <p>{{ post.caption }}<p>
+        <div class="row ms-2">
+            <div class="col-md-5 border-end border-dark-subtle">
+                <h4>Title: {{ post.title }}</h4>
+                <p>Caption: {{ post.caption }}<p>
+                <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
+            </div>
+            <div class="col-md-6 ms-3">
+                <h4 class="mb-5">Actions:</h4>
+                <p><a class="btn btn-success" href="#">Edit post</a><p>
+                <a class="btn btn-danger" href="#">Delete post</a>
+            </div>
+        </div>
         <hr>
     {% endfor %}
 {% endblock content %}
