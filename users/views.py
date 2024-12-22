@@ -8,7 +8,7 @@ from posts.models import Post
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().filter(user=request.user)
     return render(request, "users/index.html", {"posts": posts})
 
 
@@ -30,7 +30,7 @@ def register_user(request):
             repeat_password = user_form.cleaned_data.get("repeat_password")
 
             if password != repeat_password:
-                message = "Password don't match"
+                message = "* Password don't match"
             else:  
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
                 
