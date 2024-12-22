@@ -3,14 +3,28 @@
 {% block title %}Home Page{% endblock title %}
 
 {% block content %}
-    <h1>Welcome {{ user.username|capfirst }}</h1>
-    <a class="btn btn-success my-3" href="{% url 'create_post' %}">Create post</a>
-    <br><hr>
-    {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        <h6>Author: <a href="{% url 'user_posts' post.user.id %}">{{ post.user.username }}</a></h6>
-        <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
-        <p>{{ post.caption }}<p>
-        <hr>
-    {% endfor %}
+    {% if user.is_authenticated %}
+        <h1>Welcome {{ user.username|capfirst }}</h1>
+        <a class="btn btn-success my-3" href="{% url 'create_post' %}">Create post</a>
+        <br><hr>
+        {% for post in posts %}
+            <h4>{{ post.title }}</h4>
+            <h6>Author: <a href="{% url 'user_posts' post.user.id %}">{{ post.user.username }}</a></h6>
+            <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
+            <p>{{ post.caption }}<p>
+            <hr>
+        {% endfor %}
+    {% else %} 
+        <div class="shadow p-3 my-5 bg-body-tertiary rounded">
+            <h1 class="mb-3">Welcome to My Media</h1>
+            <hr>
+            <h4 class="mt-5">As an unauthorized user you could login to your account or to create a new one.</h4>         
+            <h4 class="">Please make your choice from navigation menu,</h4>         
+            <h4 class="">or click one of the buttons bellow.</h4>  
+            <div class="mt-5">
+                <a class="btn btn-success rounded mb-3 me-2" href="{% url 'login' %}">Log in to your account</a>
+                <a class="btn btn-primary rounded mb-3" href="{% url 'register' %}">Create new account</a>
+            </div>   
+        </div>    
+    {% endif %}
 {% endblock content %}
