@@ -66,11 +66,11 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 print(request.user.is_authenticated)
-                return render(request, "users/login.html")
+                return redirect("index")
             else:
-                message = "** Invalid username or password!"
+                message = "* Invalid username or password!"
         else:
-            message = "** Invalid form. Please populate all input fields!"
+            message = "* Invalid form. Please populate all input fields!"
 
     context = { 
         "form": form,
