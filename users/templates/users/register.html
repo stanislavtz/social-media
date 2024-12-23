@@ -3,24 +3,37 @@
 {% block title %}Rester Page{% endblock title %}
 
 {% block content %}
+    <h1 class="mb-3">Register page</h1>
+    <h4 class="mb-2">Please fill all input fields bellow.</h4>
+    <hr class="mb-3">
     {% if not user.is_authenticated %}
         <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in user_form %}
-                <div class="mt-2">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {{ field.errors }}
-                </div>
-            {% endfor %}
-            <br>
-            {{ profile_form.as_p }}
+            <div class="container">
+                {% csrf_token %}
+                {% for field in user_form %}
+                    <div class="my-3 d-flex">
+                        <div class="fw-semibold" style="width:10rem">{{ field.label_tag }}</div>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
 
-            {% if message %}
-                <p class="text-danger">{{ message }}</p>
-            {% endif %}
-            <input type="submit" class="btn btn-primary mt-3" value="Register">
+                {% for field in profile_form %}
+                    <div class="my-3 d-flex">
+                        <div class="fw-semibold" style="width:10rem">{{ field.label_tag }}</div>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+
+                {% if message %}
+                    <p class="text-danger">{{ message }}</p>
+                {% endif %}
+
+                <input type="submit" class="btn btn-primary mt-3" value="Register">
+            </div>
         <form>
+        <hr>
         <div class="mt-3">Already have an account? Go to <a href="{% url 'login' %}">Login page</a></div>
     {% else %}
         <h1>You are already registered user.</h1>
