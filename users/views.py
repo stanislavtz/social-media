@@ -34,10 +34,10 @@ def register_user(request):
             else:  
                 user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
                 
-                if not request.FILES.get("img"):
-                    request.FILES["img"] = "users/NoImage.png"
+                if not request.FILES.get("image"):
+                    request.FILES["image"] = "users/NoImage.png"
                 
-                Profile.objects.create(user=user, img=request.FILES.get("img"))
+                Profile.objects.create(user=user, image=request.FILES.get("image"))
 
                 return redirect("login")
     
