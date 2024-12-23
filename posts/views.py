@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatePostForm
+from .models import Post
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -31,3 +32,14 @@ def users_post(request):
     }
     
     return render(request, "posts/user_posts.html", context)
+
+
+@login_required
+def post_details(request, slug):
+    post = Post.objects.get(slug=slug)
+    user = request.user
+
+    if post.user == user:
+        return render(request, "posts/post_details.html", {"post": post})
+    
+    return redirect("user_post")
