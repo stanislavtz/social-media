@@ -12,7 +12,7 @@
                 {% csrf_token %}
                 {% for field in user_form %}
                     <div class="my-3 d-flex">
-                        <div class="fw-semibold" style="width:10rem">{{ field.label_tag }}</div>
+                        <div class="fw-semibold" style="width:9rem">{{ field.label_tag }}</div>
                         {{ field }}
                         {{ field.errors }}
                     </div>
@@ -20,7 +20,7 @@
 
                 {% for field in profile_form %}
                     <div class="my-3 d-flex">
-                        <div class="fw-semibold" style="width:10rem">{{ field.label_tag }}</div>
+                        <div class="fw-semibold" style="width:9rem">{{ field.label_tag }}</div>
                         {{ field }}
                         {{ field.errors }}
                     </div>
