@@ -8,10 +8,14 @@
         <a class="btn btn-success my-3" href="{% url 'create_post' %}">Create post</a>
         <br><hr>
         {% for post in posts %}
-            <h4>Post title: {{ post.title|capfirst }}</h4>
-            <h6>Author: <a href="{% url 'profile' %}">{{ post.user.username }}</a></h6>
-            <p>{{ post.caption }}<p>
-            <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
+            <div class="card w-50 border-0">
+                <a href="{% url 'post_details' post.slug %}" class="link-underline link-underline-opacity-0">
+                    <h4 class="link-body-emphasis">Post title: {{ post.title|capfirst }}</h4>
+                    <p class="link-body-emphasis">{{ post.caption }}<p>
+                        <img class="rounded" src="{{ post.image.url }}" width="250px" height="auto">
+                </a>
+                <h6>Author: <a href="{% url 'profile' %}">{{ post.user.username }}</a></h6>
+            </div>
             <hr>
         {% endfor %}
     {% else %} 
