@@ -3,9 +3,17 @@
 {% block title %}Post Create Page{% endblock title %}
 
 {% block content %}
+    <h1 class="mb-3">Create post</h1>
+    <hr class="mb-3">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success rounded">Create Post</button>
+        {% for field in form %}
+            <div class="my-3 d-flex">
+                <div class="fw-semibold" style="width:5rem;">{{ field.label_tag }}</div>
+                <div>{{ field }}</div>
+                <div>{{ field.errors }}</div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success rounded">Create</button>
     </form>
 {% endblock content %}
