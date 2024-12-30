@@ -10,7 +10,7 @@ from posts.models import Post
 def index(request):
     posts = None
     if request.user.is_authenticated:
-        posts = Post.objects.all().filter(user=request.user)
+        posts = Post.objects.all()
     return render(request, "users/index.html", {"posts": posts})
 
 
