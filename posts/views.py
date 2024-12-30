@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CreatePostForm
 from .models import Post
-from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 @login_required
@@ -17,7 +17,7 @@ def create_post(request):
             new_item.user = request.user
             new_item.save()
 
-            return redirect("index")
+            return redirect("profile")
         
     return render(request, "posts/create_post.html", {"form": form})
 
@@ -43,3 +43,17 @@ def post_details(request, slug):
         return render(request, "posts/post_details.html", {"post": post})
     
     return redirect("user_post")
+
+
+@login_required
+def like_post(request):
+    post_id = request.POST.get("post_id")
+    post = get_object_or_404(Post, id=post_id)
+    user  = request.user
+
+    if user not in post.liked_by.all():
+        post.liked_by.add(user)
+    else:
+        post.liked_by.remove(user)
+
+    return redirect("index")
