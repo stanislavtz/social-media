@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>{{ user.username|title }}'s profile page</h1>
+    <a class="btn btn-success my-3" href="{% url 'create_post' %}">Create post</a>
     <hr>
     <h4>Username: {{ user.username }}</h4>
     <h4>First name: {{ user.first_name|title }}</h4>
