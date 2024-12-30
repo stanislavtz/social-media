@@ -47,21 +47,21 @@
                 </div>
             </div>
             <div>
-                {% if post.liked_by.all|length > 0%}
-                    {% if user in post.liked_by.all and post.liked_by.all|length == 1 %}
+                {% if post.liked_by.count > 0 %}
+                    {% if user in post.liked_by.all and post.liked_by.count == 1 %}
                         You like that post.
-                    {% elif user in post.liked_by.all and post.liked_by.all|length > 1 %}
-                        You and {{ post.liked_by.all|length|add:-1 }} 
-                        {% if post.liked_by.all|length == 2 %}
+                    {% elif user in post.liked_by.all and post.liked_by.count > 1 %}
+                        You and {{ post.liked_by.count|add:-1 }} 
+                        {% if post.liked_by.count == 2 %}
                             more user like that post.
                         {% else %}
                             more users like that post.
                         {% endif %}
                     {% elif user not in post.liked_by.all %}
-                        {% if post.liked_by.all|length == 1 %}
-                            {{ post.liked_by.all|length }} user like that post.
+                        {% if post.liked_by.count == 1 %}
+                            {{ post.liked_by.count }} user like that post.
                         {% else %}
-                            {{ post.liked_by.all|length }} users like that post.
+                            {{ post.liked_by.count }} users like that post.
                         {% endif %}
                     {% endif %}
                 {% endif %}
