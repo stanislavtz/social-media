@@ -1,3 +1,8 @@
 .post-buttons {
     cursor: pointer;
 }
+
+#id_content {
+    width: 30rem;
+    padding: 18px;;
+}

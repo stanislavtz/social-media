@@ -2,16 +2,43 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+
 from .forms import RegisterForm, LoginForm, ProfileForm, EditUserForm
 from .models import Profile
+
 from posts.models import Post
+from posts.forms import CommentForm
+
 
 # Create your views here.
 def index(request):
     posts = None
     if request.user.is_authenticated:
         posts = Post.objects.all()
-    return render(request, "users/index.html", {"posts": posts})
+
+        comment_form = CommentForm()
+
+        if request.method == "POST":
+            comment_form = CommentForm(request.POST)
+
+            if comment_form.is_valid():
+                post_id = request.POST.get("post_id")
+                
+                comment = comment_form.save(commit=False)
+                comment.user = request.user
+                comment.post = get_object_or_404(Post, id=post_id)
+
+                comment.save()
+            
+            return redirect("index")
+
+    context = {
+        "posts": posts,
+        "form": comment_form,
+    }
+
+    return render(request, "users/index.html", context)
 
 
 def register_user(request):
