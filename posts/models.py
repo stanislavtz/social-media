@@ -28,5 +28,5 @@ class Comment(models.Model):
     created = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username + " " + " ".join(self.content.split()[:3]) + " ..."
+        return self.user.username + " - " + " ".join(self.content.split()[:3]) + " ..."
     
